@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Login } from "../components/Login";
 import { Home } from "../components/Home";
 import { ImageCommands } from "../components/image-commands/ImageCommands";
@@ -16,6 +16,10 @@ const routes = createBrowserRouter([
             {
                 path: 'text-commands',
                 Component: TextCommands
+            },
+            {
+                path: '*',
+                Component: () => <Navigate to={'/'}/>
             }
         ]
     },
