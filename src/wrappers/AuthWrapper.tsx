@@ -7,7 +7,7 @@ const authConfig: TAuthConfig = {
   authorizationEndpoint: 'https://discord.com/api/oauth2/authorize',
   tokenEndpoint: 'https://discord.com/api/oauth2/token',
   redirectUri: 'http://localhost:5173/',
-  scope: 'identify guilds',
+  scope: 'identify guilds guilds.members.read',
   extraTokenParameters: {
     client_secret: import.meta.env.VITE_CLIENT_SECRET ?? 'Add your client secret to the .env file'
   },
@@ -17,8 +17,8 @@ const authConfig: TAuthConfig = {
 export const AuthWrapper: React.FC<PropsWithChildren> = ({children}) => {
 
   return (
-        <AuthProvider authConfig={authConfig}>
-          {children}
-        </AuthProvider>
+      <AuthProvider authConfig={authConfig}>
+        {children}
+      </AuthProvider>
     )
 }

@@ -9,6 +9,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@mantine/core": "^7.4.2",
+    "@tabler/icons-react": "^2.46.0",
+    "axios-hooks": "^5.0.2",
+    "hex-to-rgba": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-oauth2-code-pkce": "^1.16.0",

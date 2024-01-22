@@ -2,17 +2,21 @@ import { PropsWithChildren, createContext, useContext, useEffect, useState } fro
 import { AuthContext } from "react-oauth2-code-pkce";
 
 type TUserContext = {
-    userId: string | undefined,
+    userId: string | undefined | null
+    user: any
     logoutUser: () => void
 }
 
 export const UserContext = createContext<TUserContext>({
     userId: undefined,
+    user: undefined,
     logoutUser: () => {}
 })
 
 export const UserContextProvider : React.FC<PropsWithChildren> = ({children}) => {
-    const [userId, setUserIdState] = useState<string | undefined>(undefined);
+    
+    const [userId, setUserIdState] = useState<string | undefined | null>(undefined);
+    const [user, setUserState] = useState<any>({});
 
     const { token } = useContext(AuthContext);
 
@@ -21,30 +25,43 @@ export const UserContextProvider : React.FC<PropsWithChildren> = ({children}) =>
         localStorage.setItem('user.id', id)
     }
 
+    const setUser = (user : any) => {
+        setUserState(user)
+        localStorage.setItem('user.obj', JSON.stringify(user))
+    }
+
     const logoutUser = () => {
         setUserIdState(undefined)
         localStorage.removeItem('user.id')
+        localStorage.removeItem('user.obj')
     }
 
     useEffect(() => {
 
         const localUserId = localStorage.getItem('user.id')
+        const localUser = localStorage.getItem('user.obj')
 
-        if (localUserId && token) {
+        console.log(localUser)
+
+        if (localUserId && localUser && token) {
             setUserIdState(localUserId)
+            setUserState(JSON.parse(localUser))
             return
         }
 
         if (token) {
+            console.log('reloading man')
             fetch('https://discord.com/api/users/@me', {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             }).then((response) => {
                 return response.json()
-            }).then((data) => {
+            }).then((data : any) => {
+                console.log(data)
                 if (data?.id) {
                     setUserId(data.id)
+                    setUser(data)
                 }
             })
         }
@@ -52,7 +69,7 @@ export const UserContextProvider : React.FC<PropsWithChildren> = ({children}) =>
     }, [token])
 
     return (
-        <UserContext.Provider value={{ userId: userId, logoutUser: logoutUser }}>
+        <UserContext.Provider value={{ userId: userId, logoutUser: logoutUser, user: user }}>
             {children}
         </UserContext.Provider>
     )
