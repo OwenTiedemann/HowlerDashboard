@@ -66,9 +66,11 @@ export const Home: React.FC = () => {
 
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        {navigation.map((item) => (
-          <NavLink component={Link} to={item.path} label={item.label} variant="subtle" />
-        ))}
+        {navigation.map((item) => {
+          return (
+            <NavLink onClick={toggle} component={Link} to={item.path} label={item.label} variant="subtle" />
+          )
+        })}
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />
