@@ -2,7 +2,7 @@ import useAxios from "axios-hooks"
 import { useContext } from "react"
 import { AuthContext } from "react-oauth2-code-pkce"
 import { Roles } from "./Roles"
-import { Card, Grid, Text, Group, Button, Box } from "@mantine/core"
+import { Card, Text, Group } from "@mantine/core"
 import classes from './Profile.module.css';
 import { UserAvatar } from "../UserAvatar"
 import { UserContext } from "../../context/UserContext"
