@@ -1,16 +1,14 @@
-import React, {useContext} from "react"
+import React, {useContext, useState} from "react"
 import { AuthContext } from "react-oauth2-code-pkce"
 import { Navigate, Outlet, Link } from "react-router-dom"
 import { UserContext } from "../context/UserContext";
-import { AppShell, NavLink, Button } from "@mantine/core";
+import { AppShell, NavLink, Button, Modal } from "@mantine/core";
 import classes from './Home.module.css'
 import { UserAvatar } from "./UserAvatar";
+import { useDisclosure } from "@mantine/hooks";
+import { Profile } from "./profile/Profile";
 
 const navigation = [
-  {
-    path: '/profile',
-    label: 'Profile'
-  },
   {
     path: '/image-commands',
     label: 'Image Commands'
@@ -26,6 +24,8 @@ export const Home : React.FC = () => {
   const { token, loginInProgress, logOut } = useContext(AuthContext)
 
   const { logoutUser } = useContext(UserContext)
+
+  const [opened, { open, close }] = useDisclosure(false);
 
   if (loginInProgress) {
     return null
@@ -52,7 +52,9 @@ export const Home : React.FC = () => {
       padding="md"
     >
       <AppShell.Header className={classes.header}>
-          <UserAvatar/>
+          <div onClick={open}>
+            <UserAvatar />
+          </div>
 
           <Button onClick={logoutFunction}>
             Logout
@@ -61,13 +63,16 @@ export const Home : React.FC = () => {
       </AppShell.Header>
       <AppShell.Navbar p="md">
         {navigation.map((item) => (
-          <NavLink component={Link} to={item.path} label={item.label} variant="subtle">
-          </NavLink>
+          <NavLink component={Link} to={item.path} label={item.label} variant="subtle"/>
         ))}
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet/>
       </AppShell.Main>
+
+      <Modal opened={opened} onClose={close} title="Profile">
+        <Profile/>
+      </Modal>
     </AppShell>
   );
 }

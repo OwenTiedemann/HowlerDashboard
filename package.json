@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mantine/core": "^7.4.2",
+    "@mantine/hooks": "^7.4.2",
     "@tabler/icons-react": "^2.46.0",
     "axios-hooks": "^5.0.2",
     "hex-to-rgba": "^2.0.1",

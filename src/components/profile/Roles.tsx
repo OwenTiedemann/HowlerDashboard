@@ -27,13 +27,13 @@ export const Roles : React.FC<RolesProps> = ({roles}) => {
     return (
         <>
             {data.map((role: any) => {
-
+                console.log(role)
                 if (role.color === 0) {
                     role.color = 808080
                 }
 
                 return (
-                    <Badge color={hexToRgba(String(role.color), 1)}>{role.name}</Badge>
+                    <Badge size="xs" color={hexToRgba(String(role.color), 1)}>{role.name}</Badge>
                 )
             })}
         </>

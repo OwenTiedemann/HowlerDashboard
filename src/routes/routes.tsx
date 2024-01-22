@@ -1,12 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Login } from "../components/Login";
 import { Home } from "../components/Home";
-import { Profile } from "../components/profile/Profile"
 import { ImageCommands } from "../components/image-commands/ImageCommands";
+import { TextCommands } from "../components/text-commands/TextCommands";
 
 const routes = createBrowserRouter([
     {
-        path: '/',
+        path: '*',
         Component: Home,
         children: [
             {
@@ -15,11 +15,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: 'text-commands',
-                Component: () => <></>
-            },
-            {
-                path: 'profile',
-                Component: Profile
+                Component: TextCommands
             }
         ]
     },

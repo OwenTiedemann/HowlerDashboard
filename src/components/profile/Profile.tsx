@@ -2,7 +2,7 @@ import useAxios from "axios-hooks"
 import { useContext } from "react"
 import { AuthContext } from "react-oauth2-code-pkce"
 import { Roles } from "./Roles"
-import { Card, Grid, Text, Group, Button } from "@mantine/core"
+import { Card, Grid, Text, Group, Button, Box } from "@mantine/core"
 import classes from './Profile.module.css';
 import { UserAvatar } from "../UserAvatar"
 import { UserContext } from "../../context/UserContext"
@@ -31,7 +31,7 @@ export const Profile: React.FC = ({ }) => {
     }
 
     return (
-        <Card withBorder padding="xl" radius="md" className={classes.card}>
+        <Card>
             <Card.Section
                 h={140}
                 style={{
@@ -51,21 +51,6 @@ export const Profile: React.FC = ({ }) => {
             <Group mt="md" justify="center" gap={30}>
                 <Roles roles={data.roles}/>
             </Group>
-            <Button fullWidth radius="md" mt="xl" size="md" variant="default">
-                Follow
-            </Button>
         </Card>
-    )
-
-    return (
-        <Grid style={{ display: 'flex' }}>
-            <Grid.Col span={12}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                    <Roles roles={data.roles} />
-                </Card>
-            </Grid.Col>
-        </Grid>
-
-
     )
 }

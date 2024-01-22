@@ -15,7 +15,7 @@ export const ImageCommands : React.FC = () => {
     }
 
     if (error) {
-        return <>{error}</>
+        return <>{JSON.stringify(error)}</>
     }
 
     return (

@@ -1,4 +1,5 @@
 import { Badge, Card, Grid, Group, Image, Text } from "@mantine/core"
+import { CommandCopyButton } from "../CommandCopyButton";
 
 type TImageCommand = {
     name: string;
@@ -23,7 +24,11 @@ export const ImageCommand : React.FC<ImageCommandProps> = ({command}) => {
                 </Card.Section>
 
                 <Group justify="space-between" mt={'md'} mb={'xs'}>
-                    <Text fw={500}>{command.name}</Text>
+                    <Group>
+                        <CommandCopyButton name={command.name}/>
+                        <Text fw={500}>{command.name}</Text>
+
+                    </Group>
                     <Badge color="blue">Image</Badge>
                 </Group>
             </Card>
