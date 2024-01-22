@@ -9,7 +9,7 @@ type RolesProps = {
 export const Roles : React.FC<RolesProps> = ({roles}) => {
 
     const [{ data, loading, error}] = useAxios({
-        url: 'http://127.0.0.1:5000/utils/roles',
+        url: import.meta.env.VITE_HOWLER_API_URL + '/utils/roles',
         params: {
             roles: roles
         }

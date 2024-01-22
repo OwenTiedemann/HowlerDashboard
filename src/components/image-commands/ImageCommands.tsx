@@ -7,7 +7,7 @@ import { Grid } from "@mantine/core";
 export const ImageCommands : React.FC = () => {
     
     const [{ data, loading, error}] = useAxios({
-        url: 'http://127.0.0.1:5000/image_commands'
+        url: import.meta.env.VITE_HOWLER_API_URL + '/image_commands'
     })
 
     if (loading) {
