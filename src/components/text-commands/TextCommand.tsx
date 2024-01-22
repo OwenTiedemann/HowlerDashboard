@@ -1,5 +1,4 @@
-import { Grid, Card, Group, Badge, Text, Button, Box, Container, Code, Center, CopyButton } from "@mantine/core";
-import { IconCopy } from "@tabler/icons-react";
+import { Grid, Card, Group, Badge, Text, Code, Center } from "@mantine/core";
 import { CommandCopyButton } from "../CommandCopyButton";
 
 
