@@ -1,8 +1,8 @@
-import React, {useContext} from "react"
+import React, { useContext } from "react"
 import { AuthContext } from "react-oauth2-code-pkce"
 import { Navigate, Outlet, Link } from "react-router-dom"
 import { UserContext } from "../context/UserContext";
-import { AppShell, NavLink, Button, Modal } from "@mantine/core";
+import { AppShell, NavLink, Button, Modal, Burger, Group } from "@mantine/core";
 import classes from './Home.module.css'
 import { UserAvatar } from "./UserAvatar";
 import { useDisclosure } from "@mantine/hooks";
@@ -19,7 +19,7 @@ const navigation = [
   }
 ]
 
-export const Home : React.FC = () => {
+export const Home: React.FC = () => {
 
   const { token, loginInProgress, logOut } = useContext(AuthContext)
 
@@ -27,13 +27,16 @@ export const Home : React.FC = () => {
 
   const [opened, { open, close }] = useDisclosure(false);
 
+  const [openedMobile, { toggle }] = useDisclosure();
+
+
   if (loginInProgress) {
     return null
   }
 
   if (!token) {
     return (
-      <Navigate to={'/login'}/>
+      <Navigate to={'/login'} />
     )
   }
 
@@ -45,33 +48,34 @@ export const Home : React.FC = () => {
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{
-        width: 300,
-        breakpoint: 'sm',
-      }}
+      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !openedMobile } }}
       padding="md"
     >
       <AppShell.Header className={classes.header}>
+        <Group>
+          <Burger opened={openedMobile} onClick={toggle} hiddenFrom="sm" size="sm" />
           <div onClick={open}>
             <UserAvatar />
           </div>
+        </Group>
 
-          <Button onClick={logoutFunction}>
-            Logout
-          </Button>
+
+        <Button onClick={logoutFunction}>
+          Logout
+        </Button>
 
       </AppShell.Header>
       <AppShell.Navbar p="md">
         {navigation.map((item) => (
-          <NavLink component={Link} to={item.path} label={item.label} variant="subtle"/>
+          <NavLink component={Link} to={item.path} label={item.label} variant="subtle" />
         ))}
       </AppShell.Navbar>
       <AppShell.Main>
-        <Outlet/>
+        <Outlet />
       </AppShell.Main>
 
       <Modal opened={opened} onClose={close} title="Profile">
-        <Profile/>
+        <Profile />
       </Modal>
     </AppShell>
   );
