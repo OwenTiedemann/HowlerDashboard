@@ -7,7 +7,7 @@ import classes from './Profile.module.css';
 import { UserAvatar } from "../UserAvatar"
 import { UserContext } from "../../context/UserContext"
 
-const COYOTES_DISCORD_ID = "360903377216864267"
+const COYOTES_DISCORD_ID = "756640701751754812"
 
 export const Profile: React.FC = ({ }) => {
 

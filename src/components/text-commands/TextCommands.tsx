@@ -7,7 +7,7 @@ import { TextCommand } from "./TextCommand";
 export const TextCommands : React.FC = () => {
     
     const [{ data, loading, error}] = useAxios({
-        url: import.meta.env.VITE_HOWLER_API_URL + '/text_commands'
+        url: import.meta.env.VITE_HOWLER_API_URL + '/api/text_commands'
     })
 
     if (loading) {
